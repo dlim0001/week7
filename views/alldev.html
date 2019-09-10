@@ -1,0 +1,48 @@
+<html>
+    <body>
+        <link rel="stylesheet" href="styles.css">
+        <a href="/">Home</a> <br>
+        <table>
+            <tr>
+                <td>Dev ID</td>
+                <td>First Name</td>
+                <td>Last Name</td>
+                <td>Level</td>
+                <td>State</td>
+                <td>Suburb</td>
+                <td>Street</td>
+                <td>Unit</td>
+            </tr>
+            <% for (let i = 0; i < developersDb.length; i++){ %>
+                <tr>
+                    <td>
+                       <%= developersDb[i]_id %>
+                    </td>
+                    <td>
+                       <%= developersDb[i]name.devFname %>
+                    </td>
+                    <td>
+                        <%= developersDb[i]name.devLname %>
+                     </td>
+                    <td>
+                       <%= developersDb[i].devLevel %>
+                    </td>
+                    <td>
+                        <%= developersDb[i]address.state %>
+                     </td>
+                    <td>
+                        <%= developersDb[i]address.suburb %>
+                    </td>
+                    <td>
+                        <%= developersDb[i]address.street %>
+                    </td>
+                    <td>
+                        <%= developersDb[i]address.unit %>
+                    </td>
+
+                </tr>
+            <% } %>
+            
+        </table>
+    </body>
+</html>
