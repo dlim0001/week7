@@ -78,7 +78,7 @@ app.post('/addthistask', function(req,res){
 
     let task = new Task ({
         name: req.body.taskName,
-        assignee: req.body.taskAssign,
+        assignee: mongoose.Types.ObjectId(req.body.taskAssign),
         due: req.body.taskDue,
         status: req.body.taskStat,
         desc: req.body.taskDes
@@ -110,7 +110,7 @@ app.get('/deleteID', function(req,res){
 app.post('/deleteID', function (req, res) {
     let deleteID = req.body;
     console.log(deleteID);
-    let filter = { _id: mongoose.Schema.Types.ObjectId(deleteID.taskID) };
+    let filter = { _id: mongoose.Types.ObjectId(deleteID.taskID) };
     Task.deleteOne(filter, function (err, doc) {
         console.log(doc);
     });
@@ -135,22 +135,26 @@ app.get('/updateID', function(req,res){
     res.sendFile(viewsPath+"updateID.html");
 });
 
-app.post('/updateID', function (req, res) {
+app.post('/updateiddata', function (req, res) {
     let taskDetails = req.body;
     console.log(taskDetails);
-    let filter = { _id: mongoose.Schema.Types.ObjectId(taskDetails.taskID)};
-    let theUpdate = { $set: { taskStat: taskDetails.taskstatus} };
-    Task.updateOne(filter, theUpdate);
+    let filter = { '_id': mongoose.Types.ObjectId(req.body.taskID)};
+    let theUpdate = { $set: { 'status': req.body.taskstatus} };
+    Task.updateOne(filter, theUpdate, (err) => {
+        if (err) {
+            console.log(err);
+        }
+    });
     res.redirect('/alltasks');
 })
 
 //sort complete tasks by descending name, limit of 3
 app.get('/sorttask', function (req, res) {
     let taskDetails = req.body;
-    Task.where({ 'status': 'completed' }).where('name').limit(3).sort('name: -1').exec(function (err, doc) {
+    Task.where({ 'status': 'completed' }).where('name').limit(3).sort({name: -1}).exec(function (err,doc) {
         console.log(doc);
+        res.send(doc);
     });
-    res.send(doc);
 });
 
 

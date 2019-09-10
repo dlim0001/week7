@@ -13,19 +13,19 @@
             <% for (let i = 0; i < tasksDb.length; i++){ %>
                 <tr>
                     <td>
-                       <%= tasksDb[i].name %>
+                       <%= tasksDb[i]['name'] %>
                     </td>
                     <td>
-                        <%= tasksDb[i].taskAsign %>
+                        <%= tasksDb[i]['assignee'] %>
                      </td>
                     <td>
-                       <%= tasksDb[i].due %>
+                       <%= tasksDb[i]['due'] %>
                     </td>
                     <td>
-                        <%= tasksDb[i].status %>
+                        <%= tasksDb[i]['status'] %>
                      </td>
                     <td>
-                        <%= tasksDb[i].desc%>
+                        <%= tasksDb[i]['desc'] %>
                     </td>
 
                 </tr>
